@@ -69,7 +69,14 @@ class Princess extends Sprite {
         this.updateLivesDisplay();
         game.writeToTextArea(this.livesDisplay, "Lives = " + this.lives);
     }
-
+looseALife() {
+    this.lives / 1;
+    this.updateLivesDisplay(this);
+    if (this.lives > 0, game.playAnimation("ball.png"), 0, 12) {
+        if  (game.end('The mysterious stranger has escaped\nPrincess Ann for now!\n\Better luck next time.'));
+        
+    }
+}
 }
 let ann = new Princess();
 
