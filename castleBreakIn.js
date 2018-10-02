@@ -63,20 +63,33 @@ class Princess extends Sprite {
         return false;
     }
 
+    updateLivesDisplay() {
+        game.writeToTextArea(this.livesDisplay, "Lives = " + this.lives);
+    }
+
+    handleGameLoop() {
+        this.x = Math.max(this.x);
+        this.y = Math.min(552, this.y);
+        this.speed = 0;
+    }
+
     handleFirstGameLoop() {
         // Set up a text area to display the number of lives remaining.
-        this.livesDisplay = game.createTextArea(game.displayWidth - 48, 20);
+        this.livesDisplay = game.createTextArea(game.displayWidth - 3 * 48, 20);
         this.updateLivesDisplay();
         game.writeToTextArea(this.livesDisplay, "Lives = " + this.lives);
     }
-looseALife() {
-    this.lives / 1;
-    this.updateLivesDisplay(this);
-    if (this.lives > 0, game.playAnimation("ball.png"), 0, 12) {
-        if  (game.end('The mysterious stranger has escaped\nPrincess Ann for now!\n\Better luck next time.'));
-        
+    loseALife() {
+        this.updateLivesDisplay();
+        if (this.lives > 0) {
+            new Ball();
+        }
+        if (this.lives <= 0) {
+            game.end('The mysterious stranger has escaped\nPrincess Ann for ' +
+                'now!\n\Better luck next time.');
+
+        }
     }
-}
 }
 let ann = new Princess();
 
@@ -90,17 +103,22 @@ class Ball extends Sprite {
         this.name = Ball;
         this.setImage("ball.png");
         this.defineAnimation("spin", 0, 12);
-        this.speed = 40;
+        this.speed = 50;
         this.angle = 50 + Math.random() * 80;
 
 
     }
     handleGameLoop() {
-        this.speed = 40;
-        if (this < 200) {
-            this.speed = 40;
+        if (this.speed < 200) {
+            this.speed = this.speed + 2;
         }
 
     }
+handleBoundaryContact() {
+    game.removeSprite(this);
+    ann.loseALife();
+    
 }
+}
+
 new Ball(360, 90, "ball", "ball.png");
