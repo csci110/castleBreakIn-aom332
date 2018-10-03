@@ -29,7 +29,7 @@ class Princess extends Sprite {
         this.width = 48;
         this.x = game.displayWidth / 2;
         this.y = game.displayHeight - this.height;
-        this.speedWhenWalking = 150;
+        this.speedWhenWalking = 250;
         this.lives = 3;
         this.accelerateOnBounce = false;
         this.defineAnimation("left", 9, 11);
@@ -80,6 +80,7 @@ class Princess extends Sprite {
         game.writeToTextArea(this.livesDisplay, "Lives = " + this.lives);
     }
     loseALife() {
+        this.lives = this.lives - 1;
         this.updateLivesDisplay();
         if (this.lives > 0) {
             new Ball();
@@ -114,11 +115,26 @@ class Ball extends Sprite {
         }
 
     }
-handleBoundaryContact() {
-    game.removeSprite(this);
-    ann.loseALife();
-    
-}
+    handleBoundaryContact() {
+        game.removeSprite(this);
+        this.Sprite = ann.loseALife();
+
+    }
 }
 
 new Ball(360, 90, "ball", "ball.png");
+
+class Block extends Sprite {
+    constructor(x, y) {
+        super();
+        this.x = x;
+        this.y = y;
+        this.name = "Ball Traps";
+        this.setImage("block1.png");
+        this.accelerateOnBounce = false;
+        
+    }
+}
+for (let i = 0; i < 5; i = i + 1) {
+    new Block(200 + i * 48, 200);
+}
