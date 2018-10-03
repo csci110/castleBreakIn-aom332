@@ -91,6 +91,10 @@ class Princess extends Sprite {
 
         }
     }
+    addALife() {
+        this.lives = this.lives + 1;
+        this.updateLivesDisplay();
+    }
 }
 let ann = new Princess();
 
@@ -104,7 +108,7 @@ class Ball extends Sprite {
         this.name = Ball;
         this.setImage("ball.png");
         this.defineAnimation("spin", 0, 12);
-        this.speed = 50;
+        this.speed = 150;
         this.angle = 50 + Math.random() * 80;
 
 
@@ -126,7 +130,7 @@ new Ball(360, 90, "ball", "ball.png");
 
 class Block extends Sprite {
     constructor(x, y) {
-        super();
+        super(x, y);
         this.x = x;
         this.y = y;
         this.name = "Ball Traps";
@@ -153,10 +157,20 @@ for (let i = 0; i < 5; i = i + 1) {
 }
 
 class ExtraLifeBlock extends Block {
-    
+    constructor(x, y) {
+        super(x, y);
+        this.setImage("block2.png");
+        Block.blocksToDestroy = Block.blocksToDestroy - 1;
+        
+    }
+    handleCollision() {
+        ann.addALife(); 
+        return true;
+        
+    }
 }
 new ExtraLifeBlock(200, 250);
 class ExtraBallBlock extends Block {
     
 }
-new ExtraLifeBlock(300, 250);
+new ExtraBallBlock(300, 250);
