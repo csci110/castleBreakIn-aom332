@@ -132,9 +132,31 @@ class Block extends Sprite {
         this.name = "Ball Traps";
         this.setImage("block1.png");
         this.accelerateOnBounce = false;
-        
+
+        Block.blocksToDestroy =
+            Block.blocksToDestroy + 1;
+    }
+    handleCollision() {
+        game.removeSprite(this);
+        Block.blocksToDestroy = Block.blocksToDestroy - 1;
+        if (Block.blocksToDestroy <= 0) {
+            game.end('Congratulations!\n\nPrincess Ann can continue' +
+                'her pursuit\nof the mysterious stranger!');
+            this.true;
+        }
     }
 }
+Block.blocksToDestroy = 0;
+
 for (let i = 0; i < 5; i = i + 1) {
     new Block(200 + i * 48, 200);
 }
+
+class ExtraLifeBlock extends Block {
+    
+}
+new ExtraLifeBlock(200, 250);
+class ExtraBallBlock extends Block {
+    
+}
+new ExtraLifeBlock(300, 250);
