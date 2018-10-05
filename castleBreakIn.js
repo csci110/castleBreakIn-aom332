@@ -161,16 +161,25 @@ class ExtraLifeBlock extends Block {
         super(x, y);
         this.setImage("block2.png");
         Block.blocksToDestroy = Block.blocksToDestroy - 1;
-        
+
     }
     handleCollision() {
-        ann.addALife(); 
+        ann.addALife();
         return true;
-        
+
     }
 }
 new ExtraLifeBlock(200, 250);
 class ExtraBallBlock extends Block {
-    
+    constructor() {
+        super();
+        this.setImage("block3.png");
+
+    }
+    handleCollision() {
+        super.handleCollision(); // call function in superclass
+        new Ball(); // extend superclass behavior
+        return true;
+    }
 }
 new ExtraBallBlock(300, 250);
