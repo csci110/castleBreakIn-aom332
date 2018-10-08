@@ -30,7 +30,6 @@ class Princess extends Sprite {
         this.x = game.displayWidth / 2;
         this.y = game.displayHeight - this.height;
         this.speedWhenWalking = 250;
-        this.lives = 3;
         this.accelerateOnBounce = false;
         this.defineAnimation("left", 9, 11);
         this.defineAnimation("right", 3, 5);
@@ -101,17 +100,17 @@ let ann = new Princess();
 class Ball extends Sprite {
     constructor(x, y, name, image) {
         super();
-        this.x = 390;
-        this.y = 500;
+        this.x = game.displayWidth / 2;
+        this.y = game.displayHeight / 2;
         this.height = 48;
         this.width = 48;
-        this.name = Ball;
+        this.name = "Ball";
         this.setImage("ball.png");
         this.defineAnimation("spin", 0, 12);
         this.speed = 150;
         this.angle = 50 + Math.random() * 80;
-
-
+        this.playAnimation("spin", true);
+        Ball.ballsInPlay / 1;
     }
     handleGameLoop() {
         if (this.speed < 200) {
@@ -121,11 +120,13 @@ class Ball extends Sprite {
     }
     handleBoundaryContact() {
         game.removeSprite(this);
-        this.Sprite = ann.loseALife();
-
+        Ball.ballsInPlay = Ball.ballsInPlay - 1;
+        if (Ball.ballsInPlay <= 0) {
+            ann.loseALife();
+        }
     }
 }
-
+Ball.ballsInPlay = 0;
 new Ball(360, 90, "ball", "ball.png");
 
 class Block extends Sprite {
@@ -170,9 +171,10 @@ class ExtraLifeBlock extends Block {
     }
 }
 new ExtraLifeBlock(200, 250);
+
 class ExtraBallBlock extends Block {
-    constructor() {
-        super();
+    constructor(x, y) {
+        super(x, y);
         this.setImage("block3.png");
 
     }
