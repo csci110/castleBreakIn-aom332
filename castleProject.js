@@ -225,4 +225,4 @@ class SpeedBlock extends Block {
         Ball.speed = 450;
     }
 }
-new SpeedBlock(300, 350);
+new SpeedBlock(500, 450);
