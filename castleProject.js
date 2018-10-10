@@ -110,7 +110,7 @@ class Ball extends Sprite {
         this.speed = 150;
         this.angle = 50 + Math.random() * 80;
         this.playAnimation("spin", true);
-        Ball.ballsInPlay / 1;
+        Ball.ballsInPlay = Ball.ballsInPlay + 1;
     }
     handleGameLoop() {
         if (this.speed < 200) {
@@ -214,3 +214,15 @@ class Fireball extends Block {
         game.removeSprite(this);
     }
 }
+class SpeedBlock extends Block {
+    constructor(x, y) {
+        super(x, y);
+        this.setImage("block2.png");
+    }
+    handleCollision() {
+        Block.blocksToDestroy = Block.blocksToDestroy - 1;
+        new Ball();
+        Ball.speed = 450;
+    }
+}
+new SpeedBlock(300, 350);
