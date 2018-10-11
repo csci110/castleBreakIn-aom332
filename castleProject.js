@@ -170,7 +170,7 @@ class ExtraLifeBlock extends Block {
 
     }
 }
-new ExtraLifeBlock(200, 250);
+new ExtraLifeBlock(200, 350);
 
 class ExtraBallBlock extends Block {
     constructor(x, y) {
