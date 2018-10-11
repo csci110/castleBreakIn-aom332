@@ -184,7 +184,7 @@ class ExtraBallBlock extends Block {
         return true;
     }
 }
-new ExtraBallBlock(300, 250);
+new ExtraBallBlock(300, 350);
 
 class ExplodingBlock extends Block {
     constructor(x, y) {
